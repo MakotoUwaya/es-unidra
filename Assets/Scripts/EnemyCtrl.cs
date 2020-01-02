@@ -164,7 +164,7 @@ public class EnemyCtrl : MonoBehaviour
 
     void DropItem()
     {
-        if (this.dropItemPrefab.Length == 0) 
+        if (this.dropItemPrefab.Length == 0)
         {
             return;
         }
