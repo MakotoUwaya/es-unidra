@@ -6,6 +6,7 @@ public class InputManager : MonoBehaviour
     Vector2 prevPosition;
     Vector2 delta = Vector2.zero;
     bool moved = false;
+    bool isRotate = false;
 
     void Update()
     {
@@ -24,6 +25,8 @@ public class InputManager : MonoBehaviour
             }
         }
 
+        this.isRotate = Input.GetButton("Fire2");
+
         // スライド操作が終了したか
         if (!Input.GetButtonUp("Fire1") && !Input.GetButton("Fire1"))
         {
@@ -32,7 +35,7 @@ public class InputManager : MonoBehaviour
         }
 
         // 移動量を求める
-        if (this.moved)
+        if (this.moved || this.isRotate)
         {
             this.delta = this.GetCursorPosition() - this.prevPosition;
         }
@@ -61,6 +64,11 @@ public class InputManager : MonoBehaviour
     public bool Moved()
     {
         return this.moved;
+    }
+
+    public bool IsRotate()
+    {
+        return this.isRotate;
     }
 
     public Vector2 GetCursorPosition()
