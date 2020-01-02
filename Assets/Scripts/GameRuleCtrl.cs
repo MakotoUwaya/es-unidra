@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameRuleCtrl : MonoBehaviour
 {
@@ -8,9 +9,20 @@ public class GameRuleCtrl : MonoBehaviour
     public bool gameOver = false;
     // ゲームクリア
     public bool gameClear = false;
+    public float sceneChangeTime = 3.0f;
 
     void Update()
     {
+        if (this.gameClear || this.gameOver)
+        {
+            this.sceneChangeTime -= Time.deltaTime;
+            if (this.sceneChangeTime <= 0.0f)
+            {
+                SceneManager.LoadScene("TitleScene");
+            }
+            return;
+        }
+
         this.timeRemaining -= Time.deltaTime;
         // 残り時間が無くなったらゲームオーバー
         if (this.timeRemaining <= 0.0f)
