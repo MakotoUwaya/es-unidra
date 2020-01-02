@@ -21,7 +21,7 @@ public class AttackArea : MonoBehaviour
         var attackInfo = new AttackInfo
         {
             // 攻撃力の計算
-            attackPower = this.status.Power,
+            attackPower = this.status.Power * (this.status.powerBoost ? 2 : 1),
             attacker = this.transform.root
         };
 
