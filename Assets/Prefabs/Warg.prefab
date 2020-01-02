@@ -1689,6 +1689,7 @@ MonoBehaviour:
   characterName: Warg
   attacking: 0
   died: 0
+  powerBoost: 0
 --- !u!114 &7593280431024322499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1728,7 +1729,9 @@ MonoBehaviour:
   waitBaseTime: 2
   walkRange: 5
   basePosition: {x: 0, y: 0, z: 0}
-  dropItemPrefab: []
+  dropItemPrefab:
+  - {fileID: 8535277790667938298, guid: b425a835837a51d4e91977d40924b31d, type: 3}
+  - {fileID: 8605731162126179014, guid: 34a9f45b593053c44b1a93814eedb9c7, type: 3}
 --- !u!1 &8504209005289465330
 GameObject:
   m_ObjectHideFlags: 0
