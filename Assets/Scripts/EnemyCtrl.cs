@@ -2,6 +2,7 @@
 
 public class EnemyCtrl : MonoBehaviour
 {
+    GameRuleCtrl gameRuleCtrl;
     CharacterStatus status;
     CharaAnimation charaAnimation;
     CharacterMove characterMove;
@@ -26,6 +27,7 @@ public class EnemyCtrl : MonoBehaviour
 
     void Start()
     {
+        this.gameRuleCtrl = FindObjectOfType<GameRuleCtrl>();
         this.status = this.GetComponent<CharacterStatus>();
         this.charaAnimation = this.GetComponent<CharaAnimation>();
         this.characterMove = this.GetComponent<CharacterMove>();
@@ -160,7 +162,7 @@ public class EnemyCtrl : MonoBehaviour
         this.attackTarget = null;
     }
 
-    void dropItem()
+    void DropItem()
     {
         if (this.dropItemPrefab.Length == 0) 
         {
@@ -173,7 +175,12 @@ public class EnemyCtrl : MonoBehaviour
     void Died()
     {
         this.status.died = true;
-        this.dropItem();
+        this.DropItem();
+        
+        if (this.gameObject.CompareTag("Boss"))
+        {
+            this.gameRuleCtrl.GameClear();
+        }
         Destroy(this.gameObject);
     }
 

@@ -3,6 +3,7 @@
 public class PlayerCtrl : MonoBehaviour
 {
     const float RayCastMaxDistance = 100.0f;
+    GameRuleCtrl gameRuleCtrl;
     CharacterStatus status;
     CharaAnimation charaAnimation;
     Transform attackTarget;
@@ -20,11 +21,16 @@ public class PlayerCtrl : MonoBehaviour
 
     void Start()
     {
+        this.gameRuleCtrl = FindObjectOfType<GameRuleCtrl>();
         this.status = this.GetComponent<CharacterStatus>();
         this.charaAnimation = this.GetComponent<CharaAnimation>();
         this.inputManager = FindObjectOfType<InputManager>();
 
         // Assert
+        if (this.gameRuleCtrl == null)
+        {
+            Debug.LogError("Not found 'GameRuleCtrl' object.");
+        }
         if (this.status == null)
         {
             Debug.LogError("Not found 'CharacterStatus' component.");
@@ -135,6 +141,7 @@ public class PlayerCtrl : MonoBehaviour
     void Died()
     {
         this.status.died = true;
+        this.gameRuleCtrl.GameOver();
     }
 
     void Damage(AttackArea.AttackInfo attackInfo)
