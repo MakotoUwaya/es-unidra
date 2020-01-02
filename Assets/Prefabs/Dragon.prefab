@@ -1686,13 +1686,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b82f2bf0bdcc04db1e820e71605e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 100
-  MaxHP: 100
-  Power: 20
+  HP: 300
+  MaxHP: 300
+  Power: 30
   lastAttackTarget: {fileID: 0}
   characterName: Dragon
   attacking: 0
   died: 0
+  powerBoost: 0
 --- !u!114 &495834764935011432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1745,7 +1746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee9cf3285ff4634d8aa2dc436f7b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitBaseTime: 2
+  waitBaseTime: 5
   walkRange: 5
   basePosition: {x: 0, y: 0, z: 0}
   dropItemPrefab: []
