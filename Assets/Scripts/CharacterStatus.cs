@@ -21,6 +21,7 @@ public class CharacterStatus : MonoBehaviour
 
     public bool powerBoost = false;
     float powerBoostTime = 0.0f;
+    ParticleSystem powerUpEffect;
 
     public void GetItem(DropItem.ItemKind itemKind)
     {
@@ -28,6 +29,7 @@ public class CharacterStatus : MonoBehaviour
         {
             case DropItem.ItemKind.Attack:
                 this.powerBoostTime = 5.0f;
+                this.powerUpEffect.Play();
                 break;
             case DropItem.ItemKind.Heal:
                 // MaxHPの半分回復
@@ -36,13 +38,30 @@ public class CharacterStatus : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (this.gameObject.CompareTag("Player"))
+        {
+            this.powerUpEffect = this.transform.Find("PowerUpEffect").GetComponent<ParticleSystem>();
+        }
+    }
+
     void Update()
     {
+        if (!this.gameObject.CompareTag("Player"))
+        {
+            return;
+        }
+
         this.powerBoost = false;
         if (this.powerBoostTime > 0.0f)
         {
             this.powerBoost = true;
             this.powerBoostTime = Mathf.Max(this.powerBoostTime - Time.deltaTime, 0.0f);
+        }
+        else
+        {
+            this.powerUpEffect.Stop();
         }
     }
 }
