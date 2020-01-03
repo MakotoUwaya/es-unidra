@@ -11,6 +11,16 @@ public class GameRuleCtrl : MonoBehaviour
     public bool gameClear = false;
     public float sceneChangeTime = 3.0f;
 
+    public AudioClip clearSeClip;
+    AudioSource clearSeAudio;
+
+    private void Start()
+    {
+        this.clearSeAudio = this.gameObject.AddComponent<AudioSource>();
+        this.clearSeAudio.clip = this.clearSeClip;
+        this.clearSeAudio.loop = false;
+    }
+
     void Update()
     {
         if (this.gameClear || this.gameOver)
@@ -39,6 +49,7 @@ public class GameRuleCtrl : MonoBehaviour
     public void GameClear()
     {
         this.gameClear = true;
+        this.clearSeAudio.Play();
         Debug.Log("GameClear");
     }
 }

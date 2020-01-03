@@ -1275,6 +1275,7 @@ MonoBehaviour:
   gameOver: 0
   gameClear: 0
   sceneChangeTime: 3
+  clearSeClip: {fileID: 8300000, guid: 6d551deda2c829442beddaf2b8d0c346, type: 3}
 --- !u!4 &1976293853
 Transform:
   m_ObjectHideFlags: 0
