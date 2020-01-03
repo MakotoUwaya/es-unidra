@@ -693,7 +693,7 @@ GameObject:
   - component: {fileID: 627605052}
   - component: {fileID: 627605051}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: PowerUpEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
