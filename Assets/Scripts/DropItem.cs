@@ -8,6 +8,7 @@ public class DropItem : MonoBehaviour
         Heal,
     };
     public ItemKind kind;
+    public AudioClip itemSeClip;
 
     void OnTriggerEnter(Collider other)
     {
@@ -19,6 +20,8 @@ public class DropItem : MonoBehaviour
             aStatus.GetItem(this.kind);
             // 取得したらアイテムを消す
             Destroy(this.gameObject);
+
+            AudioSource.PlayClipAtPoint(this.itemSeClip, this.transform.position);
         }
     }
 

@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kind: 1
+  itemSeClip: {fileID: 8300000, guid: ca232964b3afa68439d9219185ac4ca0, type: 3}
 --- !u!65 &8535277790598216912
 BoxCollider:
   m_ObjectHideFlags: 0
