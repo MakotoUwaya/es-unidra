@@ -3,10 +3,16 @@
 public class AttackArea : MonoBehaviour
 {
     CharacterStatus status;
+    public AudioClip hitSeClip;
+    AudioSource hitSeAudio;
 
     void Start()
     {
         this.status = this.transform.root.GetComponent<CharacterStatus>();
+
+        this.hitSeAudio = this.gameObject.AddComponent<AudioSource>();
+        this.hitSeAudio.clip = this.hitSeClip;
+        this.hitSeAudio.loop = false;
     }
 
     public class AttackInfo
@@ -35,6 +41,8 @@ public class AttackArea : MonoBehaviour
         other.SendMessage("Damage", this.GetAttackInfo());
         // 攻撃した対象を保存.
         this.status.lastAttackTarget = other.transform.root.gameObject;
+
+        this.hitSeAudio.Play();
     }
 
     // 攻撃判定を有効にする.

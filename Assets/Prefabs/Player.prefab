@@ -6214,6 +6214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2f8aaf41b82ac4c9685df9af3a5882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSeClip: {fileID: 8300000, guid: 4107b009a307aa548b22cac6645266e8, type: 3}
 --- !u!1 &8701827617207049930
 GameObject:
   m_ObjectHideFlags: 0
