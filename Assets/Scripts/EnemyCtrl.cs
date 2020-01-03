@@ -13,6 +13,7 @@ public class EnemyCtrl : MonoBehaviour
     public float walkRange = 5.0f;
     public Vector3 basePosition;
     public GameObject[] dropItemPrefab;
+    public GameObject hitEffect;
 
     enum State
     {
@@ -186,6 +187,10 @@ public class EnemyCtrl : MonoBehaviour
 
     void Damage(AttackArea.AttackInfo attackInfo)
     {
+        var effect = Instantiate(this.hitEffect, this.transform.position, Quaternion.identity);
+        effect.transform.localPosition = this.transform.position + new Vector3(0.0f, 0.5f, 0.0f);
+        Destroy(effect, 0.3f);
+
         this.status.HP -= attackInfo.attackPower;
         if (this.status.HP <= 0)
         {

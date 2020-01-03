@@ -1732,6 +1732,8 @@ MonoBehaviour:
   dropItemPrefab:
   - {fileID: 8535277790667938298, guid: b425a835837a51d4e91977d40924b31d, type: 3}
   - {fileID: 8605731162126179014, guid: 34a9f45b593053c44b1a93814eedb9c7, type: 3}
+  hitEffect: {fileID: 4280422198367591106, guid: c624d487bdc162a43bc9591382442ccd,
+    type: 3}
 --- !u!1 &8504209005289465330
 GameObject:
   m_ObjectHideFlags: 0

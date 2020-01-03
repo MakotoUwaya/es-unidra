@@ -1750,6 +1750,8 @@ MonoBehaviour:
   walkRange: 5
   basePosition: {x: 0, y: 0, z: 0}
   dropItemPrefab: []
+  hitEffect: {fileID: 4280422198367591106, guid: c624d487bdc162a43bc9591382442ccd,
+    type: 3}
 --- !u!1 &8486960327925491464
 GameObject:
   m_ObjectHideFlags: 0
