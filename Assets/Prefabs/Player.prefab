@@ -5495,6 +5495,7 @@ MonoBehaviour:
   attackRange: 1.5
   hitEffect: {fileID: 4280422198367591106, guid: c624d487bdc162a43bc9591382442ccd,
     type: 3}
+  deathSeClip: {fileID: 8300000, guid: f8edc9bebcccd2241922f458e8278c04, type: 3}
 --- !u!114 &2845603897398248224
 MonoBehaviour:
   m_ObjectHideFlags: 0

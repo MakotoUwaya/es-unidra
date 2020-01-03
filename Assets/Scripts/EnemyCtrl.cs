@@ -14,6 +14,7 @@ public class EnemyCtrl : MonoBehaviour
     public Vector3 basePosition;
     public GameObject[] dropItemPrefab;
     public GameObject hitEffect;
+    public AudioClip deathSeClip;
 
     enum State
     {
@@ -176,6 +177,7 @@ public class EnemyCtrl : MonoBehaviour
     void Died()
     {
         this.status.died = true;
+        AudioSource.PlayClipAtPoint(this.deathSeClip, this.transform.position);
         this.DropItem();
         
         if (this.gameObject.CompareTag("Boss"))

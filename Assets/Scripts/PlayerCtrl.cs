@@ -11,6 +11,8 @@ public class PlayerCtrl : MonoBehaviour
     public float attackRange = 1.5f;
     public GameObject hitEffect;
     TargetCursor targetCursor;
+    public AudioClip deathSeClip;
+    AudioSource deathSeAudio;
     State state = State.Walking;
     State nextState = State.Walking;
 
@@ -29,6 +31,10 @@ public class PlayerCtrl : MonoBehaviour
         this.inputManager = FindObjectOfType<InputManager>();
         this.targetCursor = FindObjectOfType<TargetCursor>();
         this.targetCursor.SetPosition(this.transform.position);
+
+        this.deathSeAudio = this.gameObject.AddComponent<AudioSource>();
+        this.deathSeAudio.clip = this.deathSeClip;
+        this.deathSeAudio.loop = false;
 
         // Assert
         if (this.gameRuleCtrl == null)
@@ -153,6 +159,8 @@ public class PlayerCtrl : MonoBehaviour
     {
         this.status.died = true;
         this.gameRuleCtrl.GameOver();
+
+        this.deathSeAudio.Play();
     }
 
     void Damage(AttackArea.AttackInfo attackInfo)

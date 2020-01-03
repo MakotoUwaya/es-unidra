@@ -608,6 +608,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2845603897398248226, guid: 400a6e74f45b9994fb64bb344c28b29f,
+        type: 3}
+      propertyPath: deathSeClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f8edc9bebcccd2241922f458e8278c04, type: 3}
     - target: {fileID: 6078857555938679334, guid: 400a6e74f45b9994fb64bb344c28b29f,
         type: 3}
       propertyPath: m_Name

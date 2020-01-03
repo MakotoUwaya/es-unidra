@@ -1753,6 +1753,7 @@ MonoBehaviour:
   dropItemPrefab: []
   hitEffect: {fileID: 4280422198367591106, guid: c624d487bdc162a43bc9591382442ccd,
     type: 3}
+  deathSeClip: {fileID: 8300000, guid: ba755bfe2e457bb4b8fe298ca6f09764, type: 3}
 --- !u!1 &8486960327925491464
 GameObject:
   m_ObjectHideFlags: 0
