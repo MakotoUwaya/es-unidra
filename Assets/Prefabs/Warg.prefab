@@ -1714,6 +1714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5749584d54f7449a765c27cad4b495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSeClip: {fileID: 8300000, guid: e26e6b584c947db4e8ffb6a607bdfaef, type: 3}
 --- !u!114 &4204205729621213993
 MonoBehaviour:
   m_ObjectHideFlags: 0

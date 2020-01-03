@@ -1615,7 +1615,7 @@ GameObject:
   - component: {fileID: 2014150111}
   m_Layer: 0
   m_Name: Dragon
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1734,6 +1734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5749584d54f7449a765c27cad4b495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSeClip: {fileID: 8300000, guid: e26e6b584c947db4e8ffb6a607bdfaef, type: 3}
 --- !u!114 &2014150111
 MonoBehaviour:
   m_ObjectHideFlags: 0
