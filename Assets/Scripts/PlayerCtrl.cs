@@ -9,6 +9,8 @@ public class PlayerCtrl : MonoBehaviour
     Transform attackTarget;
     InputManager inputManager;
     public float attackRange = 1.5f;
+    public GameObject hitEffect;
+    TargetCursor targetCursor;
     State state = State.Walking;
     State nextState = State.Walking;
 
@@ -25,6 +27,8 @@ public class PlayerCtrl : MonoBehaviour
         this.status = this.GetComponent<CharacterStatus>();
         this.charaAnimation = this.GetComponent<CharaAnimation>();
         this.inputManager = FindObjectOfType<InputManager>();
+        this.targetCursor = FindObjectOfType<TargetCursor>();
+        this.targetCursor.SetPosition(this.transform.position);
 
         // Assert
         if (this.gameRuleCtrl == null)
@@ -98,7 +102,7 @@ public class PlayerCtrl : MonoBehaviour
                 var layer = hitInfo.collider.gameObject.layer;
                 if (layer == LayerMask.NameToLayer("Ground"))
                 {
-                    this.SendMessage("SetDestination", hitInfo.point);
+                    this.SetDestinationPoint(hitInfo.point);
                 }
                 else if (layer == LayerMask.NameToLayer("EnemyHit"))
                 {
@@ -108,15 +112,22 @@ public class PlayerCtrl : MonoBehaviour
                     if (distance < this.attackRange)
                     {
                         this.attackTarget = hitInfo.collider.transform;
+                        this.targetCursor.SetPosition(this.attackTarget.position);
                         this.ChangeState(State.Attacking);
                     }
                     else
                     {
-                        this.SendMessage("SetDestination", hitInfo.point);
+                        this.SetDestinationPoint(hitInfo.point);
                     }
                 }
             }
         }
+    }
+
+    void SetDestinationPoint(Vector3 point)
+    {
+        this.SendMessage("SetDestination", point);
+        this.targetCursor.SetPosition(point);
     }
 
     void AttackStart()
@@ -146,6 +157,10 @@ public class PlayerCtrl : MonoBehaviour
 
     void Damage(AttackArea.AttackInfo attackInfo)
     {
+        var effect = Instantiate(this.hitEffect, this.transform.position, Quaternion.identity);
+        effect.transform.localPosition = this.transform.position + new Vector3(0.0f, 0.5f, 0.0f);
+        Destroy(effect, 0.3f);
+
         this.status.HP -= attackInfo.attackPower;
         if (this.status.HP <= 0)
         {
