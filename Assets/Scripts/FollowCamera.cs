@@ -51,4 +51,9 @@ public class FollowCamera : MonoBehaviour
             }
         }
     }
+
+    public void SetTarget(Transform target)
+    {
+        this.lookTarget = target;
+    }
 }

@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using MonobitEngine;
 
-public class GameRuleCtrl : MonoBehaviour
+public class GameRuleCtrl : MonobitEngine.MonoBehaviour
 {
+    GameObject player;
+    public Transform startPoint;
+    public FollowCamera followCamera;
+
     // 残り時間
     public float timeRemaining = 5.0f * 60.0f;
     // ゲームオーバーフラグ
@@ -23,6 +28,13 @@ public class GameRuleCtrl : MonoBehaviour
 
     void Update()
     {
+        if (this.player == null && MonobitNetwork.inRoom)
+        {
+            var shiftVector = new Vector3(MonobitNetwork.room.playerCount * 1.5f, 0.0f);
+            this.player = MonobitNetwork.Instantiate("Player", this.startPoint.position + shiftVector, this.startPoint.rotation, 0);
+            this.followCamera.SetTarget(this.player.transform);
+        }
+
         if (this.gameClear || this.gameOver)
         {
             this.sceneChangeTime -= Time.deltaTime;
