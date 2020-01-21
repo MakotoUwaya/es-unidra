@@ -1594,6 +1594,9 @@ GameObject:
   - component: {fileID: 7593280431024322499}
   - component: {fileID: 7917398458152349037}
   - component: {fileID: 4204205729621213993}
+  - component: {fileID: -9104427357537753899}
+  - component: {fileID: 1773724897025522540}
+  - component: {fileID: 7415651270784274579}
   m_Layer: 0
   m_Name: Warg
   m_TagString: Untagged
@@ -1737,6 +1740,87 @@ MonoBehaviour:
   hitEffect: {fileID: 4280422198367591106, guid: c624d487bdc162a43bc9591382442ccd,
     type: 3}
   deathSeClip: {fileID: 8300000, guid: 3b47f4112914e2147b151aa2ed0fddf6, type: 3}
+--- !u!114 &-9104427357537753899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8503599266966529746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277584237ad31144584195f79af03cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_viewIdField: 0
+  m_IsDontDestroyOnRoom: 0
+  m_IsInstantiated: 0
+  m_ObjectStreamCheckTime: 0
+  m_ObjectStreamSendBytes: 
+  m_IsEncrypt: 1
+  InternalObservedComponents: []
+  ObservedComponents:
+  - {fileID: 1773724897025522540}
+  - {fileID: 7415651270784274579}
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  ownershipTransfer: 0
+  compressedStream: 0
+--- !u!114 &1773724897025522540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8503599266966529746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e43095d0b31c5c4da5d336507b33fe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SyncPosition:
+    m_EnableSync: 1
+    m_EnableInterpolate: 1
+    m_LerpRate: 10
+  m_SyncRotation:
+    m_EnableSync: 1
+    m_EnableInterpolate: 0
+    m_LerpRate: 5
+  m_SyncScale:
+    m_EnableSync: 0
+    m_EnableInterpolate: 0
+    m_LerpRate: 1
+  m_SnapEnabled: 1
+  m_SnapThreshold: 3
+--- !u!114 &7415651270784274579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8503599266966529746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a212333f0fad40b429ea9c65549ab6de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 3374181712585931195}
+  m_Controller: {fileID: 9100000, guid: 58f5a073311266d4786e6f508e9abfc5, type: 2}
+  m_SyncAnimLayers:
+  - m_Index: 0
+    m_Name: Base Layer
+    m_EnableSync: 1
+  m_SyncAnimParams:
+  - m_Type: 1
+    m_Name: Speed
+    m_EnableSync: 1
+  - m_Type: 4
+    m_Name: Attacking
+    m_EnableSync: 1
+  - m_Type: 9
+    m_Name: Down
+    m_EnableSync: 0
 --- !u!1 &8504209005289465330
 GameObject:
   m_ObjectHideFlags: 0
