@@ -63,27 +63,27 @@ public class NetworkManager : MonobitEngine.MonoBehaviour
         GUILayout.FlexibleSpace();
         if (MonobitNetwork.inRoom)
         {
-            if (MonobitNetwork.isHost)
-            {
-                if (GUILayout.Button("Start game"))
-                {
-                    Debug.Log("Start game");
-                    var playerCustomParams = new Hashtable
-                    {
-                        ["isGameStarted"] = true
-                    };
-                    MonobitNetwork.SetPlayerCustomParameters(playerCustomParams);
-                    this.isGameStarted = true;
-                }
-            }
-            else
-            {
-                if (GUILayout.Button("Leave room"))
-                {
-                    Debug.Log("Leave room");
-                    MonobitNetwork.LeaveRoom();
-                }
-            }
+            //if (MonobitNetwork.isHost)
+            //{
+            //    if (GUILayout.Button("Start game"))
+            //    {
+            //        Debug.Log("Start game");
+            //        var playerCustomParams = new Hashtable
+            //        {
+            //            ["isGameStarted"] = true
+            //        };
+            //        MonobitNetwork.SetPlayerCustomParameters(playerCustomParams);
+            //        this.isGameStarted = true;
+            //    }
+            //}
+            //else
+            //{
+            //    if (GUILayout.Button("Leave room"))
+            //    {
+            //        Debug.Log("Leave room");
+            //        MonobitNetwork.LeaveRoom();
+            //    }
+            //}
         }
         else
         {
@@ -169,7 +169,7 @@ public class NetworkManager : MonobitEngine.MonoBehaviour
     private void OnJoinedRoom()
     {
         Debug.Log("Joined room");
-        this.isGameStarted = false;
+        this.isGameStarted = true;
     }
 
     /// <summary>ルームの作成に失敗した際に呼ばれるコールバック</summary>
