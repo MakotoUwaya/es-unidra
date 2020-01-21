@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using MonobitEngine;
 
-public class PlayerCtrl : MonoBehaviour
+public class PlayerCtrl : MonobitEngine.MonoBehaviour
 {
     const float RayCastMaxDistance = 100.0f;
     GameRuleCtrl gameRuleCtrl;
@@ -16,11 +17,32 @@ public class PlayerCtrl : MonoBehaviour
     State state = State.Walking;
     State nextState = State.Walking;
 
+    MonobitView playerMonobitView;
+
     enum State
     {
         Walking,
         Attacking,
         Died
+    }
+
+    private void Awake()
+    {
+        // すべての親オブジェクトに対して MonobitView コンポーネントを検索する
+        if (this.GetComponentInParent<MonobitView>() != null)
+        {
+            this.playerMonobitView = this.GetComponentInParent<MonobitView>();
+        }
+        // 親オブジェクトに存在しない場合、すべての子オブジェクトに対して MonobitView コンポーネントを検索する
+        else if (this.GetComponentInChildren<MonobitView>() != null)
+        {
+            this.playerMonobitView = this.GetComponentInChildren<MonobitView>();
+        }
+        // 親子オブジェクトに存在しない場合、自身のオブジェクトに対して MonobitView コンポーネントを検索して設定する
+        else
+        {
+            this.playerMonobitView = this.GetComponent<MonobitView>();
+        }
     }
 
     void Start()
@@ -57,6 +79,11 @@ public class PlayerCtrl : MonoBehaviour
 
     void Update()
     {
+        if (!this.playerMonobitView.isMine)
+        {
+            return;
+        }
+
         switch (this.state)
         {
             case State.Walking:
