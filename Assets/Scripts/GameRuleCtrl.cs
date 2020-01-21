@@ -40,6 +40,7 @@ public class GameRuleCtrl : MonobitEngine.MonoBehaviour
             this.sceneChangeTime -= Time.deltaTime;
             if (this.sceneChangeTime <= 0.0f)
             {
+                this.player = null;
                 SceneManager.LoadScene("TitleScene");
             }
             return;
