@@ -208,7 +208,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 1.7e-44, z: 4.153e-42, w: 1.05e-43}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 3.59e-43}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -403,7 +403,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.5904e-41, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -684,6 +684,7 @@ MonoBehaviour:
   gameOver: 0
   gameClear: 0
   sceneChangeTime: 3
+  responeTime: 8
   clearSeClip: {fileID: 8300000, guid: 6d551deda2c829442beddaf2b8d0c346, type: 3}
 --- !u!114 &1157879385
 MonoBehaviour:
@@ -830,6 +831,75 @@ MonoBehaviour:
   radius: 1
   angularVelocity: 480
   destination: {x: 0, y: 0.5, z: 0}
+--- !u!1001 &1854002790
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4871553229344282171, guid: 3f38d777b8faa4f41b8cec14d32d4b8b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 49.95446
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871553229344282171, guid: 3f38d777b8faa4f41b8cec14d32d4b8b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871553229344282171, guid: 3f38d777b8faa4f41b8cec14d32d4b8b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -28.80596
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871553229344282171, guid: 3f38d777b8faa4f41b8cec14d32d4b8b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871553229344282171, guid: 3f38d777b8faa4f41b8cec14d32d4b8b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.99768466
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871553229344282171, guid: 3f38d777b8faa4f41b8cec14d32d4b8b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871553229344282171, guid: 3f38d777b8faa4f41b8cec14d32d4b8b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.06801051
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871553229344282171, guid: 3f38d777b8faa4f41b8cec14d32d4b8b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871553229344282171, guid: 3f38d777b8faa4f41b8cec14d32d4b8b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871553229344282171, guid: 3f38d777b8faa4f41b8cec14d32d4b8b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 187.799
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871553229344282171, guid: 3f38d777b8faa4f41b8cec14d32d4b8b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484889454751769640, guid: 3f38d777b8faa4f41b8cec14d32d4b8b,
+        type: 3}
+      propertyPath: m_Name
+      value: Dragon
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3f38d777b8faa4f41b8cec14d32d4b8b, type: 3}
 --- !u!1 &2115054230
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,6 +19,27 @@ public class GameRuleCtrl : MonobitEngine.MonoBehaviour
     public AudioClip clearSeClip;
     AudioSource clearSeAudio;
 
+    MonobitView gameRuleMonobitView;
+
+    private void Awake()
+    {
+        // すべての親オブジェクトに対して MonobitView コンポーネントを検索する
+        if (this.GetComponentInParent<MonobitView>() != null)
+        {
+            this.gameRuleMonobitView = this.GetComponentInParent<MonobitView>();
+        }
+        // 親オブジェクトに存在しない場合、すべての子オブジェクトに対して MonobitView コンポーネントを検索する
+        else if (this.GetComponentInChildren<MonobitView>() != null)
+        {
+            this.gameRuleMonobitView = this.GetComponentInChildren<MonobitView>();
+        }
+        // 親子オブジェクトに存在しない場合、自身のオブジェクトに対して MonobitView コンポーネントを検索して設定する
+        else
+        {
+            this.gameRuleMonobitView = this.GetComponent<MonobitView>();
+        }
+    }
+
     private void Start()
     {
         this.clearSeAudio = this.gameObject.AddComponent<AudioSource>();
@@ -40,7 +61,10 @@ public class GameRuleCtrl : MonobitEngine.MonoBehaviour
             this.sceneChangeTime -= Time.deltaTime;
             if (this.sceneChangeTime <= 0.0f)
             {
+                this.sceneChangeTime = 3.0f;
                 this.player = null;
+                MonobitNetwork.LeaveRoom();
+                MonobitNetwork.LeaveLobby();
                 SceneManager.LoadScene("TitleScene");
             }
             return;
@@ -56,13 +80,47 @@ public class GameRuleCtrl : MonobitEngine.MonoBehaviour
 
     public void GameOver()
     {
+        if (!this.gameOver && MonobitNetwork.isHost)
+        {
+            this.gameRuleMonobitView.RPC(nameof(this.GameOverOnNetwork), MonobitTargets.AllBuffered);
+        }
+    }
+
+    [MunRPC]
+    void GameOverOnNetwork()
+    {
         this.gameOver = true;
         Debug.Log("GameOver");
     }
+
     public void GameClear()
+    {
+        if (!this.gameClear && MonobitNetwork.isHost)
+        {
+            this.gameRuleMonobitView.RPC(nameof(this.GameClearOnNetwork), MonobitTargets.AllBuffered);
+        }
+    }
+
+    [MunRPC]
+    void GameClearOnNetwork()
     {
         this.gameClear = true;
         this.clearSeAudio.Play();
         Debug.Log("GameClear");
+    }
+
+    /// <summary>他プレイヤーが入室してきた際に呼ばれるコールバック</summary>
+    /// <param name="newPlayer">入室してきたプレイヤーの情報</param>
+    private void OnOtherPlayerConnected(MonobitPlayer newPlayer)
+    {
+        Debug.Log($"Time Remaining: {newPlayer.name}");
+        this.gameRuleMonobitView.RPC(nameof(this.SetRemainTime), newPlayer, this.timeRemaining);
+    }
+
+    [MunRPC]
+    void SetRemainTime(float time)
+    {
+        this.timeRemaining = time;
+        Debug.Log("Remain time");
     }
 }
