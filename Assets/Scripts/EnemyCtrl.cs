@@ -198,20 +198,33 @@ public class EnemyCtrl : MonobitEngine.MonoBehaviour
             return;
         }
         var dropItem = this.dropItemPrefab[Random.Range(0, this.dropItemPrefab.Length)];
-        Instantiate(dropItem, this.transform.position, Quaternion.identity);
+        MonobitNetwork.Instantiate(
+            dropItem.name,
+            this.transform.position,
+            Quaternion.identity,
+            0,
+            null,
+            true,
+            false,
+            true
+        );
     }
 
     void Died()
     {
-        this.status.died = true;
         AudioSource.PlayClipAtPoint(this.deathSeClip, this.transform.position);
-        this.DropItem();
+        this.status.died = true;
+
         
         if (this.gameObject.CompareTag("Boss"))
         {
             this.gameRuleCtrl.GameClear();
         }
-        Destroy(this.gameObject);
+        if (MonobitNetwork.isHost)
+        {
+            this.DropItem();
+            MonobitNetwork.Destroy(this.gameObject);
+        }
     }
 
     void Damage(AttackArea.AttackInfo attackInfo)
@@ -220,7 +233,22 @@ public class EnemyCtrl : MonobitEngine.MonoBehaviour
         effect.transform.localPosition = this.transform.position + new Vector3(0.0f, 0.5f, 0.0f);
         Destroy(effect, 0.3f);
 
-        this.status.HP -= attackInfo.attackPower;
+        if (this.enemyMonobitView.isMine)
+        {
+            this.DamageMine(attackInfo.attackPower);
+        }
+        else
+        {
+            Debug.Log($"Enemy damage: {nameof(this.DamageMine)}");
+            this.enemyMonobitView.RPC(nameof(this.DamageMine), MonobitTargets.Host, attackInfo.attackPower);
+        }
+    }
+
+    [MunRPC]
+    void DamageMine(int damage)
+    {
+        Debug.Log($"Enemy damage: {damage}");
+        this.status.HP -= damage;
         if (this.status.HP <= 0)
         {
             this.status.HP = 0;

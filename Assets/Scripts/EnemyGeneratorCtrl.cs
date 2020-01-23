@@ -38,7 +38,16 @@ public class EnemyGeneratorCtrl : MonobitEngine.MonoBehaviour
             if (this.existEnemys[enemyCount] == null)
             {
                 // 敵作成
-                this.existEnemys[enemyCount] = MonobitNetwork.Instantiate(this.enemy.name, this.transform.position, this.transform.rotation, 0);
+                this.existEnemys[enemyCount] = MonobitNetwork.Instantiate(
+                    this.enemy.name,
+                    this.transform.position,
+                    this.transform.rotation,
+                    0,
+                    null,
+                    true,
+                    false,
+                    true
+                );
                 return;
             }
         }
