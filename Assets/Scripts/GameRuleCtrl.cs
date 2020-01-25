@@ -119,8 +119,11 @@ public class GameRuleCtrl : MonobitEngine.MonoBehaviour
     /// <param name="newPlayer">入室してきたプレイヤーの情報</param>
     void OnOtherPlayerConnected(MonobitPlayer newPlayer)
     {
-        Debug.Log($"Time Remaining: {newPlayer.name}");
-        this.gameRuleMonobitView.RPC(nameof(this.SetRemainTime), newPlayer, this.timeRemaining);
+        if (MonobitNetwork.isHost)
+        {
+            Debug.Log($"Time Remaining: {newPlayer.name}");
+            this.gameRuleMonobitView.RPC(nameof(this.SetRemainTime), newPlayer, this.timeRemaining);
+        }
     }
 
     [MunRPC]
