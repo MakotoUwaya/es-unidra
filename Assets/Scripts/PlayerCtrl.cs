@@ -196,21 +196,14 @@ public class PlayerCtrl : MonobitEngine.MonoBehaviour
         effect.transform.localPosition = this.transform.position + new Vector3(0.0f, 0.5f, 0.0f);
         Destroy(effect, 0.3f);
 
-        if (this.playerMonobitView.isMine)
-        {
-            this.DamageMine(attackInfo.attackPower);
-        }
-        else
-        {
-            Debug.Log($"Player damage: {nameof(this.DamageMine)}");
-            this.playerMonobitView.RPC(nameof(this.DamageMine), MonobitTargets.All, attackInfo.attackPower);
-        }
+        Debug.Log($"Player damage: {nameof(this.DamageMine)}");
+        this.playerMonobitView.RPC(nameof(this.DamageMine), MonobitTargets.All, attackInfo.attackPower);
     }
 
     [MunRPC]
     void DamageMine(int damage)
     {
-        Debug.Log($"Player damage: {damage}");
+        Debug.Log($"Player DamageMine: {damage}");
         this.status.HP -= damage;
         if (this.status.HP <= 0)
         {

@@ -233,15 +233,8 @@ public class EnemyCtrl : MonobitEngine.MonoBehaviour
         effect.transform.localPosition = this.transform.position + new Vector3(0.0f, 0.5f, 0.0f);
         Destroy(effect, 0.3f);
 
-        if (this.enemyMonobitView.isMine)
-        {
-            this.DamageMine(attackInfo.attackPower);
-        }
-        else
-        {
-            Debug.Log($"Enemy damage: {nameof(this.DamageMine)}");
-            this.enemyMonobitView.RPC(nameof(this.DamageMine), MonobitTargets.Host, attackInfo.attackPower);
-        }
+        Debug.Log($"Enemy damage: {nameof(this.DamageMine)}");
+        this.enemyMonobitView.RPC(nameof(this.DamageMine), MonobitTargets.All, attackInfo.attackPower);
     }
 
     [MunRPC]
