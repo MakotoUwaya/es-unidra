@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using MonobitEngine;
 
-public class CharacterStatus : MonoBehaviour
+public class CharacterStatus : MonobitEngine.MonoBehaviour
 {
     // 体力
     public int HP = 100;
@@ -63,5 +64,12 @@ public class CharacterStatus : MonoBehaviour
         {
             this.powerUpEffect.Stop();
         }
+    }
+
+    [MunRPC]
+    public void SetName(string name)
+    {
+        Debug.Log($"RPC Call player: {name}");
+        this.characterName = name;
     }
 }

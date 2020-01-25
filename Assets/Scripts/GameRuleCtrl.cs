@@ -4,7 +4,7 @@ using MonobitEngine;
 
 public class GameRuleCtrl : MonobitEngine.MonoBehaviour
 {
-    GameObject player;
+    public GameObject player;
     public Transform startPoint;
     public FollowCamera followCamera;
 
@@ -54,6 +54,9 @@ public class GameRuleCtrl : MonobitEngine.MonoBehaviour
             var shiftVector = new Vector3(MonobitNetwork.room.playerCount * 1.5f, 0.0f);
             this.player = MonobitNetwork.Instantiate("Player", this.startPoint.position + shiftVector, this.startPoint.rotation, 0);
             this.followCamera.SetTarget(this.player.transform);
+
+            Debug.Log($"Create player: {MonobitNetwork.playerName}, call {nameof(CharacterStatus.SetName)}()");
+            this.player.BroadcastMessage(nameof(CharacterStatus.SetName), MonobitNetwork.playerName);
         }
 
         if (this.gameClear || this.gameOver)
@@ -114,7 +117,7 @@ public class GameRuleCtrl : MonobitEngine.MonoBehaviour
 
     /// <summary>他プレイヤーが入室してきた際に呼ばれるコールバック</summary>
     /// <param name="newPlayer">入室してきたプレイヤーの情報</param>
-    private void OnOtherPlayerConnected(MonobitPlayer newPlayer)
+    void OnOtherPlayerConnected(MonobitPlayer newPlayer)
     {
         Debug.Log($"Time Remaining: {newPlayer.name}");
         this.gameRuleMonobitView.RPC(nameof(this.SetRemainTime), newPlayer, this.timeRemaining);
