@@ -6,6 +6,7 @@ public class GameRuleCtrl : MonobitEngine.MonoBehaviour
 {
     public GameObject player;
     public Transform startPoint;
+    public Transform bossEnemyPoint;
     public FollowCamera followCamera;
 
     // 残り時間
@@ -51,6 +52,21 @@ public class GameRuleCtrl : MonobitEngine.MonoBehaviour
     {
         if (this.player == null && MonobitNetwork.inRoom)
         {
+            if (MonobitNetwork.isHost)
+            {
+                // ボス作成
+                MonobitNetwork.Instantiate(
+                    "Dragon",
+                    this.bossEnemyPoint.position,
+                    this.bossEnemyPoint.rotation,
+                    0,
+                    null,
+                    false,
+                    false,
+                    false
+                );
+            }
+
             var shiftVector = new Vector3(MonobitNetwork.room.playerCount * 1.5f, 0.0f);
             this.player = MonobitNetwork.Instantiate("Player", this.startPoint.position + shiftVector, this.startPoint.rotation, 0);
             this.followCamera.SetTarget(this.player.transform);

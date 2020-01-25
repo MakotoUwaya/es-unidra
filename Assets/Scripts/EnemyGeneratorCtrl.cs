@@ -44,9 +44,9 @@ public class EnemyGeneratorCtrl : MonobitEngine.MonoBehaviour
                     this.transform.rotation,
                     0,
                     null,
-                    true,
                     false,
-                    true
+                    false,
+                    false
                 );
                 return;
             }
