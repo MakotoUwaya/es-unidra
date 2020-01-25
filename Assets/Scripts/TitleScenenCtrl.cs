@@ -35,8 +35,10 @@ public class TitleScenenCtrl : MonobitEngine.MonoBehaviour
     }
 
     void OnClickStartButton()
-    {// 自動でデフォルトのロビーへ入室する
-        MonobitNetwork.autoJoinLobby = true;
+    {
+        // // 自動でデフォルトのロビーへ入室する
+        // MonobitNetwork.autoJoinLobby = true;
+
         var name = this.playerName.Trim();
         if (string.IsNullOrEmpty(name))
         {
@@ -46,9 +48,6 @@ public class TitleScenenCtrl : MonobitEngine.MonoBehaviour
 
         MonobitNetwork.playerName = name;
         MonobitNetwork.ConnectServer("ESUNIDRA_v_0_0_2");
-
-        // TODO: ゲーム開始処理は別途追加する
-        // SceneManager.LoadScene("GameScene");
     }
 
     void OnClickExitButton()
@@ -69,6 +68,7 @@ public class TitleScenenCtrl : MonobitEngine.MonoBehaviour
     public void OnConnectedToMonobit()
     {
         Debug.Log("接続しました");
+        MonobitNetwork.JoinLobby();
     }
 
     // サーバから切断したときに呼ばれる接続コールバック
@@ -98,6 +98,7 @@ public class TitleScenenCtrl : MonobitEngine.MonoBehaviour
     /// <summary>ロビーへ入室した際に呼ばれるコールバック</summary>
     private void OnJoinedLobby()
     {
+        Debug.Log("ロビー入室しました");
         // ロビー入室に成功したのでロビー画面へ切り替える
         SceneManager.LoadScene("GameScene");
     }

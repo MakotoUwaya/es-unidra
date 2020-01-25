@@ -66,8 +66,9 @@ public class GameRuleCtrl : MonobitEngine.MonoBehaviour
             {
                 this.sceneChangeTime = 3.0f;
                 this.player = null;
-                MonobitNetwork.LeaveRoom();
-                MonobitNetwork.LeaveLobby();
+
+                // TODO: 接続維持してリトライしたい
+                MonobitNetwork.DisconnectServer();
                 SceneManager.LoadScene("TitleScene");
             }
             return;
