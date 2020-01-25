@@ -70,11 +70,14 @@ public class GameRuleCtrl : MonobitEngine.MonoBehaviour
             return;
         }
 
-        this.timeRemaining -= Time.deltaTime;
-        // 残り時間が無くなったらゲームオーバー
-        if (this.timeRemaining <= 0.0f)
+        if (MonobitNetwork.inRoom)
         {
-            this.GameOver();
+            this.timeRemaining -= Time.deltaTime;
+            // 残り時間が無くなったらゲームオーバー
+            if (this.timeRemaining <= 0.0f)
+            {
+                this.GameOver();
+            }
         }
     }
 
