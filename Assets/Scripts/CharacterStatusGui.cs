@@ -28,11 +28,22 @@ public class CharacterStatusGui : MonoBehaviour
     {
         var x = this.baseWidth - this.playerLifeBarRect.width - this.playerStatusOffset.x;
         var y = this.playerStatusOffset.y;
-        this.DrawCharacterStatus(
-            x, y,
-            this.playerStatus,
-            this.playerLifeBarRect,
-            this.playerFrontLifeBarColor);
+        var deltaHeight = this.nameRect.height + this.playerLifeBarRect.height;
+        var players = FindObjectsOfType<PlayerCtrl>() as PlayerCtrl[];
+        foreach (var player in players)
+        {
+            var status = player.GetComponent<CharacterStatus>();
+            if (status != null)
+            {
+                this.DrawCharacterStatus(
+                    x, y,
+                    status,
+                    this.playerLifeBarRect,
+                    this.playerFrontLifeBarColor
+                );
+                y += deltaHeight;
+            }
+        }
     }
 
     // 敵ステータスの描画.
@@ -78,12 +89,6 @@ public class CharacterStatusGui : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        var playerCtrl = FindObjectOfType<PlayerCtrl>();
-        this.playerStatus = playerCtrl.GetComponent<CharacterStatus>();
-    }
-
     private void OnGUI()
     {
         // 解像度対応.
@@ -92,8 +97,14 @@ public class CharacterStatusGui : MonoBehaviour
             Quaternion.identity,
             new Vector3(Screen.width / this.baseWidth, Screen.height / this.baseHeight, 1f));
 
-        // ステータス.
-        this.DrawPlayerStatus();
-        this.DrawEnemyStatus();
+        var gameRuleCtrl = FindObjectOfType(typeof(GameRuleCtrl)) as GameRuleCtrl;
+        if (gameRuleCtrl.player != null)
+        {
+            this.playerStatus = gameRuleCtrl.player.GetComponent<CharacterStatus>();
+
+            // ステータス.
+            this.DrawPlayerStatus();
+            this.DrawEnemyStatus();
+        }
     }
 }

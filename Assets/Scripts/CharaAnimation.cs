@@ -15,12 +15,12 @@ public class CharaAnimation : MonoBehaviour
 
     void StartAttackHit()
     {
-        Debug.Log("StartAttackHit");
+        // Debug.Log("StartAttackHit");
     }
 
     void EndAttackHit()
     {
-        Debug.Log("EndAttackHit");
+        // Debug.Log("EndAttackHit");
     }
 
     void EndAttack()

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using MonobitEngine;
 
-public class EnemyGeneratorCtrl : MonoBehaviour
+public class EnemyGeneratorCtrl : MonobitEngine.MonoBehaviour
 {
-    // 生まれてくる敵プレハブ
-    public GameObject enemyPrefab;
+    public GameObject enemy;
     // 敵を格納
     GameObject[] existEnemys;
     // アクティブの最大数
@@ -23,7 +23,10 @@ public class EnemyGeneratorCtrl : MonoBehaviour
     {
         while (true)
         {
-            this.Generate();
+            if (MonobitNetwork.isHost)
+            {
+                this.Generate();
+            }
             yield return new WaitForSeconds(3.0f);
         }
     }
@@ -35,7 +38,16 @@ public class EnemyGeneratorCtrl : MonoBehaviour
             if (this.existEnemys[enemyCount] == null)
             {
                 // 敵作成
-                this.existEnemys[enemyCount] = Instantiate(this.enemyPrefab, this.transform.position, this.transform.rotation) as GameObject;
+                this.existEnemys[enemyCount] = MonobitNetwork.Instantiate(
+                    this.enemy.name,
+                    this.transform.position,
+                    this.transform.rotation,
+                    0,
+                    null,
+                    false,
+                    false,
+                    false
+                );
                 return;
             }
         }

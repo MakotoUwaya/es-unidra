@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using MonobitEngine;
 
-public class EnemyCtrl : MonoBehaviour
+public class EnemyCtrl : MonobitEngine.MonoBehaviour
 {
     GameRuleCtrl gameRuleCtrl;
     CharacterStatus status;
@@ -16,6 +17,8 @@ public class EnemyCtrl : MonoBehaviour
     public GameObject hitEffect;
     public AudioClip deathSeClip;
 
+    MonobitView enemyMonobitView;
+
     enum State
     {
         Walking,	// 探索
@@ -26,6 +29,25 @@ public class EnemyCtrl : MonoBehaviour
 
     State state = State.Walking;
     State nextState = State.Walking;
+
+    private void Awake()
+    {
+        // すべての親オブジェクトに対して MonobitView コンポーネントを検索する
+        if (this.GetComponentInParent<MonobitView>() != null)
+        {
+            this.enemyMonobitView = this.GetComponentInParent<MonobitView>();
+        }
+        // 親オブジェクトに存在しない場合、すべての子オブジェクトに対して MonobitView コンポーネントを検索する
+        else if (this.GetComponentInChildren<MonobitView>() != null)
+        {
+            this.enemyMonobitView = this.GetComponentInChildren<MonobitView>();
+        }
+        // 親子オブジェクトに存在しない場合、自身のオブジェクトに対して MonobitView コンポーネントを検索して設定する
+        else
+        {
+            this.enemyMonobitView = this.GetComponent<MonobitView>();
+        }
+    }
 
     void Start()
     {
@@ -41,6 +63,11 @@ public class EnemyCtrl : MonoBehaviour
 
     void Update()
     {
+        if (!this.enemyMonobitView.isMine)
+        {
+            return;
+        }
+
         switch (this.state)
         {
             case State.Walking:
@@ -171,20 +198,33 @@ public class EnemyCtrl : MonoBehaviour
             return;
         }
         var dropItem = this.dropItemPrefab[Random.Range(0, this.dropItemPrefab.Length)];
-        Instantiate(dropItem, this.transform.position, Quaternion.identity);
+        MonobitNetwork.Instantiate(
+            dropItem.name,
+            this.transform.position,
+            Quaternion.identity,
+            0,
+            null,
+            true,
+            false,
+            true
+        );
     }
 
     void Died()
     {
-        this.status.died = true;
         AudioSource.PlayClipAtPoint(this.deathSeClip, this.transform.position);
-        this.DropItem();
+        this.status.died = true;
+
         
         if (this.gameObject.CompareTag("Boss"))
         {
             this.gameRuleCtrl.GameClear();
         }
-        Destroy(this.gameObject);
+        if (MonobitNetwork.isHost)
+        {
+            this.DropItem();
+            MonobitNetwork.Destroy(this.gameObject);
+        }
     }
 
     void Damage(AttackArea.AttackInfo attackInfo)
@@ -193,7 +233,15 @@ public class EnemyCtrl : MonoBehaviour
         effect.transform.localPosition = this.transform.position + new Vector3(0.0f, 0.5f, 0.0f);
         Destroy(effect, 0.3f);
 
-        this.status.HP -= attackInfo.attackPower;
+        Debug.Log($"Enemy damage: {nameof(this.DamageMine)}");
+        this.enemyMonobitView.RPC(nameof(this.DamageMine), MonobitTargets.All, attackInfo.attackPower);
+    }
+
+    [MunRPC]
+    void DamageMine(int damage)
+    {
+        Debug.Log($"Enemy damage: {damage}");
+        this.status.HP -= damage;
         if (this.status.HP <= 0)
         {
             this.status.HP = 0;

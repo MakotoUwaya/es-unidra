@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using MonobitEngine;
 
-public class CharacterStatus : MonoBehaviour
+public class CharacterStatus : MonobitEngine.MonoBehaviour
 {
     // 体力
     public int HP = 100;
@@ -23,18 +24,24 @@ public class CharacterStatus : MonoBehaviour
     float powerBoostTime = 0.0f;
     ParticleSystem powerUpEffect;
 
-    public void GetItem(DropItem.ItemKind itemKind)
+    MonobitView characterStatusMonobitView;
+
+    private void Awake()
     {
-        switch (itemKind)
+        // すべての親オブジェクトに対して MonobitView コンポーネントを検索する
+        if (this.GetComponentInParent<MonobitView>() != null)
         {
-            case DropItem.ItemKind.Attack:
-                this.powerBoostTime = 5.0f;
-                this.powerUpEffect.Play();
-                break;
-            case DropItem.ItemKind.Heal:
-                // MaxHPの半分回復
-                this.HP = Mathf.Min(this.HP + this.MaxHP / 2, this.MaxHP);
-                break;
+            this.characterStatusMonobitView = this.GetComponentInParent<MonobitView>();
+        }
+        // 親オブジェクトに存在しない場合、すべての子オブジェクトに対して MonobitView コンポーネントを検索する
+        else if (this.GetComponentInChildren<MonobitView>() != null)
+        {
+            this.characterStatusMonobitView = this.GetComponentInChildren<MonobitView>();
+        }
+        // 親子オブジェクトに存在しない場合、自身のオブジェクトに対して MonobitView コンポーネントを検索して設定する
+        else
+        {
+            this.characterStatusMonobitView = this.GetComponent<MonobitView>();
         }
     }
 
@@ -63,5 +70,33 @@ public class CharacterStatus : MonoBehaviour
         {
             this.powerUpEffect.Stop();
         }
+    }
+
+    public void GetItem(DropItem.ItemKind itemKind)
+    {
+        switch (itemKind)
+        {
+            case DropItem.ItemKind.Attack:
+                this.powerBoostTime = 5.0f;
+                this.powerUpEffect.Play();
+                break;
+            case DropItem.ItemKind.Heal:
+                // MaxHPの半分回復
+                this.HP = Mathf.Min(this.HP + this.MaxHP / 2, this.MaxHP);
+                break;
+        }
+    }
+
+    public void SetName(string name)
+    {
+        this.characterStatusMonobitView.RPC(nameof(this.SetNameOnNetwork), MonobitTargets.AllBuffered, name);
+    }
+
+
+    [MunRPC]
+    void SetNameOnNetwork(string name)
+    {
+        Debug.Log($"RPC Call player: {name}");
+        this.characterName = name;
     }
 }
