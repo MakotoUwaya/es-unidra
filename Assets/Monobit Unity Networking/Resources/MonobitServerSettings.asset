@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: MonobitServerSettings
   m_EditorClassIdentifier: 
   HostType: 4
-  HostProtocol: 0
+  HostProtocol: 2
   AuthID: 7e86060b-4880-4551-a99d-b0cf88b0081b-7f626e47
-  SelfServerAddress: 
-  m_SelfServerPortString: 
-  m_SelfServerPort: 0
+  SelfServerAddress: yw82t7q2fu.cloud.monobitengine.com
+  m_SelfServerPortString: 10019
+  m_SelfServerPort: 10019
   MunCloudEndpointAddress: https://endpoint.cloud.monobitengine.com
   MunCloudAppID: 7d70dd54477ca42405fcaad05ceca8d6
   MunCloudConnectionTimeOut: 20000
